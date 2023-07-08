@@ -2,18 +2,12 @@ import React from 'react';
 import { AiFillPlusCircle, AiFillDelete, AiFillMinusCircle } from 'react-icons/ai';
 
 class CartItem extends React.Component {
-    constructor () {
-        super();
-        this.state = {
-            price: 9999,
-            title: 'i phone',
-            qty: 1,
-            img :''
-        }
-    }
-
+    
+    
     increaseQuantity = () => {
-        console.log("quantity", this.state.qty);
+        // console.log("quantity", this.state.qty);
+
+
         //method 1 to use setState
         // this.setState({
         //     qty: this.state.qty + 1
@@ -24,11 +18,21 @@ class CartItem extends React.Component {
             return {
                 qty: prevState.qty + 1
             }
-        })
+        }, 
+        //callback function.
+        // ()=>{
+        //     console.log("quantity", this.state.qty);
+        // }
+        )
     }
 
     decreaseQuantity = () => {
-        console.log("quantity : ", this.state.qty);
+        // console.log("quantity : ", this.state.qty);
+        const {qty} = this.state;
+        if(qty === 0) {
+            return;
+        }
+
         this.setState((prevState) =>{
             return {
                 qty : prevState.qty - 1
@@ -36,14 +40,16 @@ class CartItem extends React.Component {
         })
     }
     render () {
-        const {price, title, qty, img} = this.state;
+        // console.log("render");
+        // console.log("this.props", this.props);
+        const {price, title, qty, img} = this.props.product;
         return(
             <div className='cart-item'>
                 <div  className='left-block'>
                     <img style = {styles.image} alt = ""/>
                 </div>
                 <div className='right-block'>
-                    <div style={{fontSize: 25}}>{this.state.title}</div>
+                    <div style={{fontSize: 25}}>{title}</div>
                     <div style={{color: '#777'}}>Rs {price}</div>
                     <div style={{color: '#777'}}>Qty: {qty}</div>
                     <div className='cart-item-actions'>
