@@ -4,45 +4,48 @@ import { AiFillPlusCircle, AiFillDelete, AiFillMinusCircle } from 'react-icons/a
 class CartItem extends React.Component {
     
     
-    increaseQuantity = () => {
-        // console.log("quantity", this.state.qty);
+    // increaseQuantity = () => {
+    //     // console.log("quantity", this.state.qty);
 
 
-        //method 1 to use setState
-        // this.setState({
-        //     qty: this.state.qty + 1
-        // });
+    //     //method 1 to use setState
+    //     // this.setState({
+    //     //     qty: this.state.qty + 1
+    //     // });
 
-        //method 2 to use setState
-        this.setState((prevState)=>{
-            return {
-                qty: prevState.qty + 1
-            }
-        }, 
-        //callback function.
-        // ()=>{
-        //     console.log("quantity", this.state.qty);
-        // }
-        )
-    }
+    //     //method 2 to use setState
+    //     this.setState((prevState)=>{
+    //         return {
+    //             qty: prevState.qty + 1
+    //         }
+    //     }, 
+    //     //callback function.
+    //     // ()=>{
+    //     //     console.log("quantity", this.state.qty);
+    //     // }
+    //     )
+    // }
 
-    decreaseQuantity = () => {
-        // console.log("quantity : ", this.state.qty);
-        const {qty} = this.state;
-        if(qty === 0) {
-            return;
-        }
+    // decreaseQuantity = () => {
+    //     // console.log("quantity : ", this.state.qty);
+    //     const {qty} = this.state;
+    //     if(qty === 0) {
+    //         return;
+    //     }
 
-        this.setState((prevState) =>{
-            return {
-                qty : prevState.qty - 1
-            }
-        })
-    }
+    //     this.setState((prevState) =>{
+    //         return {
+    //             qty : prevState.qty - 1
+    //         }
+    //     })
+    // }
+
+
     render () {
         // console.log("render");
         // console.log("this.props", this.props);
         const {price, title, qty, img} = this.props.product;
+        const {product, onDecreaseQuantity, onIncreaseQuantity, onDeleteItem} = this.props;
         return(
             <div className='cart-item'>
                 <div  className='left-block'>
@@ -56,20 +59,21 @@ class CartItem extends React.Component {
 
                         {/* {Buttons} */}
                         <AiFillPlusCircle 
-                        alt = 'increse' 
+                        alt = 'increase' 
                         className='action-icons'
-                        onClick={this.increaseQuantity}
+                        onClick={()=>onIncreaseQuantity(product)}
                         />
 
                         <AiFillMinusCircle 
-                        alt="decrese" 
+                        alt="decrease" 
                         className='action-icons' 
-                        onClick={this.decreaseQuantity}
+                        onClick={()=> onDecreaseQuantity(product)}
                         />
 
                         <AiFillDelete 
                         alt="delete"  
                         className='action-icons'
+                        onClick={()=>onDeleteItem(product.id)}
                         />
 
                     </div>
